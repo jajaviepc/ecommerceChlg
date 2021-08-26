@@ -2,7 +2,6 @@ package com.challenge.ecommerce.controller;
 
 
 import com.challenge.ecommerce.service.PriceService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -32,27 +31,9 @@ class EcommerceControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private ObjectMapper objectMapper;
-
-    @Autowired
     PriceService priceService;
 
     final String BASE_URL = "/ecommerce";
-
-    @Test
-    @DisplayName("Getting all prices from database")
-    void shouldReturnAllPricesFromDatabase() throws Exception {
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get(BASE_URL + "/prices2")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andReturn();
-
-        String body = result.getResponse().getContentAsString();
-        Assert.assertFalse(body.isEmpty());
-        Assert.assertEquals(result.getResponse().getStatus(), HttpStatus.OK.value());
-    }
 
     @Test
     @DisplayName("Getting prices with given date and brandId")

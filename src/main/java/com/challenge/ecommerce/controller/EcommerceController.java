@@ -1,6 +1,5 @@
 package com.challenge.ecommerce.controller;
 
-import com.challenge.ecommerce.models.Price;
 import com.challenge.ecommerce.models.PriceResponse;
 import com.challenge.ecommerce.service.PriceService;
 import org.springframework.beans.factory.annotation.Autowired;
