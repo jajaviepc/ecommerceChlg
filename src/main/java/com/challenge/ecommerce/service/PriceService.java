@@ -10,22 +10,19 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class PriceService {
     @Autowired
     PriceRepository priceRepository;
 
-    public List<Price> getAllPrices() {
-        return priceRepository.findAll();
-    }
-
-    public List<PriceResponse> findPricesGivenADateAndBrandId(String date , Long brandId) {
+    public PriceResponse findPricesGivenADateAndBrandIdAndProductId(String date , Long brandId, Integer productId) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
-        return priceRepository.findPricesGivenADateAndBrandId(dateTime,brandId).
-                stream().map(ResponseMapper::fromPriceEntityToPriceResponse)
-                .collect(Collectors.toList());
+        return priceRepository.findPricesGivenADateAndBrandIdAndProductId(dateTime,brandId,productId).
+                stream()
+                .findFirst()
+                .map(ResponseMapper::fromPriceEntityToPriceResponse)
+                .orElseThrow(() -> new NullPointerException("Doesn't find any result for the actual search"));
     }
 }

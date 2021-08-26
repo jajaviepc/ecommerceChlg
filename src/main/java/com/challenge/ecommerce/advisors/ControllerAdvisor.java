@@ -25,7 +25,7 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
             NullPointerException ex, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("message", ex.getMessage());
+        body.put("message", ex.getLocalizedMessage());
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
@@ -34,7 +34,7 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
             Exception ex, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("message", ex.getMessage());
+        body.put("message", "Something went wrong with the application, non handled exception.");
         return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

@@ -14,6 +14,6 @@ public interface PriceRepository extends JpaRepository<Price, Long> {
 
     List<Price> findAll();
 
-    @Query("select prices from Price prices where prices.startDate <= :dateToApply and prices.endDate >= :dateToApply and prices.brand.brandId = :brandId order by prices.priority desc")
-    List<Price> findPricesGivenADateAndBrandId(@Param("dateToApply") LocalDateTime dateToApply, @Param("brandId") Long brandId);
+    @Query("select prices from Price prices where prices.startDate <= :dateToApply and prices.endDate >= :dateToApply and prices.brand.brandId = :brandId and prices.productId = :productId order by prices.priority desc")
+    List<Price> findPricesGivenADateAndBrandIdAndProductId(@Param("dateToApply") LocalDateTime dateToApply, @Param("brandId") Long brandId, @Param("productId") Integer productId);
 }
